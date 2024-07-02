@@ -1,0 +1,5 @@
+CREATE TABLE $tableName (
+#foreach($column in $columns)
+    $column.columnName $column.columnType#if($column.primaryKey) PRIMARY KEY#if($column.autoIncr) AUTO_INCREMENT#end#end #if($column.notNull) NOT NULL#end #if($column.hasDefault) DEFAULT $column.defaultValue#end $column.columnComment#if($foreach.hasNext),#end
+#end
+) $storeEngine $tableComment;
