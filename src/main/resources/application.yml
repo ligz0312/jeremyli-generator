@@ -1,0 +1,62 @@
+server:
+  port: 12012
+
+spring:
+  application:
+    name: jeremy-generator
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+#    dve1:
+#      url: jdbc:mysql://0.0.0.0:3306/generator?useUnicode=true&amp;characterEncoding=utf8&amp;characterSetResults=utf8&amp;useSSL=false
+#      username: root
+#      password: xxxxx
+#      druid:
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        ## 初始化大小，最小，最大
+#        initialSize: 5
+#        minIdle: 5
+#        maxActive: 20
+#        maxPoolPreparedStatementPerConnectionSize: 20
+#        ## 配置获取连接等待超时的时间
+#        maxWait: 60000
+#        # 配置一个连接在池中最小生存的时间，单位是毫秒
+#        minEvictableIdleTimeMillis: 300000
+#        poolPreparedStatements: true
+#        #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+#        testOnBorrow: false
+#        #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+#        testOnReturn: false
+#        #建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+#        testWhileIdle: true
+#        #连接保持空闲而不被驱逐的最小时间
+#        timeBetweenEvictionRunsMillis: 60000
+#        #用来检测连接是否有效的sql，要求是一个查询语句
+#        validationQuery: SELECT 1
+    druid:
+      url: jdbc:mysql://localhost:3306/generator?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      username: root
+      password: xxxxx
+      ## 初始化大小，最小，最大
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxPoolPreparedStatementPerConnectionSize: 20
+      ## 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      poolPreparedStatements: true
+      #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      testOnBorrow: false
+      #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      testOnReturn: false
+      #建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      testWhileIdle: true
+      #连接保持空闲而不被驱逐的最小时间
+      timeBetweenEvictionRunsMillis: 60000
+      #用来检测连接是否有效的sql，要求是一个查询语句
+      validationQuery: SELECT 1
+
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
