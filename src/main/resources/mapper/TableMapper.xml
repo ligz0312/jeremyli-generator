@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jeremyli.jeremygenerator.mapper.TableMapper">
+    <insert id="saveTableInfos" parameterType="com.jeremyli.jeremygenerator.entity.TableEntity">
+        set @config_id = uuid();
+        insert into gt_table_config_info (config_id, table_name, table_comment,
+                                          table_charset, table_collate, table_datasource, table_scheme,
+                                          table_store_engine, crt_name, upd_name, rmk)
+        values (@config_id, #{tableName}, #{tableComment}, #{tableCharset}, #{tableCollate}, #{tableDataSource}, #{schemeName}, #{storeEngine},
+            #{crtName}, #{updName}, #{rmk}) ;
+        <foreach collection="columnEntities" item="col" index="index" >
+            insert into gt_col_config_info (table_config_id, col_name, col_type, col_is_pk,
+            col_is_auto_incr, col_is_null, col_default_value, col_comment, crt_name, upd_name, rmk)
+            values (@config_id, #{col.columnName}, #{col.columnType}, #{col.primaryKey}, #{col.autoIncr},
+            #{col.notNull},,  #{col.defaultValue}, #{col.columnComment}, #{col.crtName}, #{col.updName}, #{col.rmk});
+        </foreach>
+    </insert>
+    <update id="createTable" parameterType="string" >
+        select * from gt_table_config_info;
+    </update>
+</mapper>
