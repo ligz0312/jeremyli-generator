@@ -2,8 +2,12 @@ package com.jeremyli.jeremygenerator.vo;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 public class ColumnVo {
+
+    @NotNull(message = "列名不能为空")
     private String columnName;
 
     private String columnType;

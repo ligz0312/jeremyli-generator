@@ -3,10 +3,14 @@ package com.jeremyli.jeremygenerator.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.jeremyli.jeremygenerator.common.Constant;
+import com.jeremyli.jeremygenerator.entity.BatchParam;
 import com.jeremyli.jeremygenerator.entity.ColumnEntity;
+import com.jeremyli.jeremygenerator.entity.JobInfo;
 import com.jeremyli.jeremygenerator.entity.TableEntity;
+import com.jeremyli.jeremygenerator.mapper.BatchParamMapper;
 import com.jeremyli.jeremygenerator.mapper.TableMapper;
 import com.jeremyli.jeremygenerator.service.GenerateService;
+import com.jeremyli.jeremygenerator.vo.BatchJob;
 import com.jeremyli.jeremygenerator.vo.TableVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -35,6 +39,8 @@ public class GenerateServiceImpl implements GenerateService {
 
     @Autowired
     TableMapper tableMapper;
+    @Autowired
+    BatchParamMapper batchParamMapper;
 
     public static final Logger logger = LoggerFactory.getLogger(GenerateServiceImpl.class);
 
@@ -170,6 +176,28 @@ public class GenerateServiceImpl implements GenerateService {
         }
     }
 
+    @Override
+    public void generateBatchSQL(BatchJob batchJob) {
+        // dev_job_info、dev_batch_date -- common
+        List<JobInfo> jobIds = batchParamMapper.getAllJobs(batchJob);
+        if (CollectionUtil.isEmpty(jobIds)){
+            logger.error("无可导出的作业...");
+            return;
+        }
+        Map<String, List<String>> batchParams = new HashMap<>();
+        jobIds.forEach(jobInfo -> {
+            List<String> tables = batchParamMapper.getBatchParams(jobInfo.getJobId());
+            batchParams.put(jobInfo.getJobId(), tables);
+        });
+
+        // 生成sql
+        batchParams.forEach((jobId, tables) -> {
+
+
+        });
+
+
+    }
 
 
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeremyli.jeremygenerator.mapper.BatchParamMapper">
+
+    <select id="getAllJobs" resultType="com.jeremyli.jeremygenerator.entity.JobInfo" parameterType="com.jeremyli.jeremygenerator.vo.BatchJob">
+        select job_id, job_type from dev_job_info
+        <where>
+            <if test="${batchJob.jobId!= null}">
+                and job_id = #{batchJob.jobId}
+            </if>
+            <if test="${batchJob.crtName!= null}">
+                and job_name = #{batchJob.jobName}
+            </if>
+            <if test="${batchJob.batchVersion!= null}">
+                and job_group = #{batchJob.jobGroup}
+            </if>
+        </where>
+
+    </select>
+</mapper>

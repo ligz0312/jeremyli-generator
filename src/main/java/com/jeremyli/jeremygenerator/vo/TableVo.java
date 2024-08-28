@@ -3,16 +3,22 @@ package com.jeremyli.jeremygenerator.vo;
 import com.jeremyli.jeremygenerator.entity.ColumnEntity;
 import lombok.Data;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 
 @Data
 public class TableVo {
 
+
     private String schemeName;
 
+    @NotNull(message = "表名不能为空")
     private String tableName;
 
+    @Valid
+    @NotNull(message = "表不能没有列")
     private List<ColumnVo> columnEntities;
 
     private String tableComment;

@@ -1,0 +1,13 @@
+#foreach($job in $jobs)
+-- $job.jobid $author
+    #foreach($table in $job.tables)
+        delete from $table.tableName where jobid = $job.jobid;
+        #if($table.columnValues.size() > 1)
+            #foreach($col in $able.columnValues)
+                insert into $table.tableName ($table.columnNames) values ($col);
+            #end
+        #else
+            insert into $table.tableName ($table.columnNames) values ($table.columnValues);
+        #end
+    #end
+#end
