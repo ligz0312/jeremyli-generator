@@ -1,17 +1,13 @@
 package com.jeremyli.jeremygenerator.controller;
 
-import cn.hutool.core.lang.Assert;
-import com.jeremyli.jeremygenerator.entity.TableEntity;
-import com.jeremyli.jeremygenerator.service.GenerateService;
-import com.jeremyli.jeremygenerator.service.impl.GenerateServiceImpl;
+import com.jeremyli.jeremygenerator.service.impl.GaussGenerateServiceImpl;
+import com.jeremyli.jeremygenerator.service.impl.MySQLGenerateServiceImpl;
 import com.jeremyli.jeremygenerator.vo.BatchJob;
 import com.jeremyli.jeremygenerator.vo.Result;
 import com.jeremyli.jeremygenerator.vo.TableVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Validated
@@ -31,7 +26,7 @@ public class CodeGenerateController {
     private static final Logger logger = LoggerFactory.getLogger(CodeGenerateController.class);
 
     @Autowired
-    GenerateServiceImpl generateService;
+    GaussGenerateServiceImpl generateService;
 
     @RequestMapping("/test")
     public Result<Object> saveConfigAndGenerate(@RequestBody @Valid TableVo tableVos){
@@ -72,8 +67,8 @@ public class CodeGenerateController {
     }
 
     @RequestMapping("/upload")
-    public String uploadConfigData(@RequestParam("file")MultipartFile file){
-        generateService.dealExcelData(file);
+    public String uploadConfigData(@RequestParam("file")MultipartFile file, @RequestParam("dbType")String dbType){
+        generateService.dealExcelData(file, dbType);
         return "success";
     }
 

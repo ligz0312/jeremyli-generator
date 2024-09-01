@@ -1,0 +1,15 @@
+##foreach($table in $tables)
+##-- $table.tableName
+DROP TABLE IF EXISTS $tableName;
+CREATE TABLE $tableName (
+    #foreach($column in $columns)
+        $column.columnName $column.columnType #if($column.notNull) NOT NULL#end #if($column.defaultValue) DEFAULT $column.defaultValue#end,
+    #end
+    constraint pk_$tableName primary key ($primaryKey)
+) with ($storeEngine) #if($partitionInfo) $partitionInfo #end;
+    comment on table $tableName is '$tableComment';
+    #foreach($column in $columns)
+    comment on column $tableName.$column.columnName is '$column.columnComment';
+    #end
+##end
+

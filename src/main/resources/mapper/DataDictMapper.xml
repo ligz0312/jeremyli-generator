@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeremyli.jeremygenerator.mapper.DataDictMapper">
+
+
+    <select id="getColumnInfoAfterReg" resultType="com.jeremyli.jeremygenerator.entity.DataFieldEntity">
+        select filed_name , filed_name_en , filed_type, filed_id , filed_comment  from data_filed_dictionary where filed_name  like #{col}
+    </select>
+</mapper>

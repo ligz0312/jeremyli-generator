@@ -37,4 +37,18 @@ public class Constant {
         }
 
     }
+
+
+    public static class BATCH_JOB_TYPE{
+
+        public static final Map<String, String> JOB_TYPES = new HashMap<>();
+
+        static {
+            JOB_TYPES.put("BATCH_LOAD", "01");
+            JOB_TYPES.put("BATCH_ISSUE", "02");
+            JOB_TYPES.put("BATCH_TRANSFER", "03");
+            JOB_TYPES.put("BATCH_PROCESS", "04");
+        }
+
+    }
 }

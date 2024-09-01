@@ -8,9 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface BatchParamMapper {
+public interface ParamCodeMapper {
 
-    List<JobInfo> getAllJobs(@Param("batchJob") BatchJob batchJob);
-
+    List<String> getParamValue(@Param("paramCode") String paramCode);
     void initData();
 }

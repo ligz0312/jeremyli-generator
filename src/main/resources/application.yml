@@ -2,6 +2,10 @@ server:
   port: 12012
 
 spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
   application:
     name: jeremy-generator
   datasource:
@@ -33,9 +37,10 @@ spring:
 #        #用来检测连接是否有效的sql，要求是一个查询语句
 #        validationQuery: SELECT 1
     druid:
-      url: jdbc:mysql://localhost:3306/generator?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-      username: root
-      password: lgz031279
+#      url: jdbc:mysql://localhost:3306/generator?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      url: jdbc:postgresql://192.168.1.101:5432/postgres
+      username: postgres
+      password: 123456
       ## 初始化大小，最小，最大
       initialSize: 5
       minIdle: 5
@@ -56,7 +61,16 @@ spring:
       timeBetweenEvictionRunsMillis: 60000
       #用来检测连接是否有效的sql，要求是一个查询语句
       validationQuery: SELECT 1
-
-    driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: org.postgresql.Driver
+#      driver-class-name: com.mysql.jdbc.Driver
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.jeremyli.jeremygenerator.mapper: DEBUG
+    org.apache.ibatis: DEBUG
+    java.sql: DEBUG

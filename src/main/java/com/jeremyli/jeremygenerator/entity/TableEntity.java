@@ -5,6 +5,7 @@ import lombok.experimental.Accessors;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 表实体类
@@ -33,5 +34,16 @@ public class TableEntity {
 
     private String databaseType;
 
+    private boolean isPartitioned;
+
+    private String partitionType;
+
+    private Map<String, String> partitionMap;
+
+    private String partitionNameSuffix;
+
+    private String partitionNamePrefix;
+
+    private String primaryKey;
 
 }

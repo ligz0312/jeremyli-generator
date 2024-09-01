@@ -13,11 +13,11 @@ public class ColumnEntity {
 
     private String columnType;
 
-    private String primaryKey;
+    private boolean primaryKey;
 
     private String autoIncr;
 
-    private String notNull;
+    private boolean notNull;
 
     private String defaultValue;
 

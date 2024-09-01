@@ -2,13 +2,16 @@ package com.jeremyli.jeremygenerator.vo;
 
 import com.jeremyli.jeremygenerator.entity.ColumnEntity;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
+@Accessors(chain = true)
 public class TableVo {
 
 
@@ -25,12 +28,25 @@ public class TableVo {
 
     private boolean multiPrimaryKey;
 
+    private String primaryKey;
+
+
     /**
      * 索引列表 map<索引名称, list<字段名>>
      */
     private HashMap<String, List<List<String>>> indexesMap;
 
-    private String storeEngine;
+    private String storeEngine = "orientation=row, store_type=astore";
+
+    private boolean isPartitioned;
+
+    private String partitionType;
+
+    private Map<String, String> partitionMap;
+
+    private String partitionNameSuffix;
+
+    private String partitionNamePrefix;
 
     private String tableCharset;
 
@@ -51,4 +67,6 @@ public class TableVo {
     private String updName;
 
     private String rmk;
+
+
 }
