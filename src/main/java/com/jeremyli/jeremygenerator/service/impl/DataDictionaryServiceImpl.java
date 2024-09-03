@@ -1,5 +1,6 @@
 package com.jeremyli.jeremygenerator.service.impl;
 
+
 import com.jeremyli.jeremygenerator.entity.DataFieldEntity;
 import com.jeremyli.jeremygenerator.mapper.DataDictMapper;
 import com.jeremyli.jeremygenerator.service.DataDictionaryService;
@@ -31,11 +32,12 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
         ArrayList<CompletableFuture<ColumnVo>> futures = new ArrayList<>();
         for (ColumnVo columnVo : columnEntities) {
             CompletableFuture<ColumnVo> supplied = CompletableFuture.supplyAsync(() -> {
-                DataFieldEntity afterReg = dataDictMapper.getColumnInfoAfterReg("%" + columnVo.getColumnComment() + "%");
-                logger.info("获取落标后信息: {}", afterReg);
-                if (afterReg == null) {
+                List<DataFieldEntity> fieldEntities = dataDictMapper.getColumnInfoAfterReg("%" + columnVo.getColumnComment() + "%");
+                if (fieldEntities == null || fieldEntities.size() == 0){
                     return columnVo;
                 }
+                DataFieldEntity afterReg = fieldEntities.get(0);
+                logger.info("获取落标后信息: {}", afterReg);
                 columnVo.setColumnIdAfterReg(afterReg.getFiledId())
                         .setColumnDescAfterReg(afterReg.getFiledComment())
                         .setColumnTypeAfterReg(afterReg.getFiledType())
@@ -64,5 +66,11 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
             logger.error("获取列信息报错，原因: {}", e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+
+    @Override
+    public List<DataFieldEntity> queryData(String queryStr) {
+        return dataDictMapper.getColumnInfoAfterReg("%" + queryStr + "%");
     }
 }
