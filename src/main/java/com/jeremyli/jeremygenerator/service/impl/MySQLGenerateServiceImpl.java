@@ -11,6 +11,7 @@ import com.jeremyli.jeremygenerator.mapper.TableMapper;
 import com.jeremyli.jeremygenerator.service.GenerateService;
 import com.jeremyli.jeremygenerator.vo.BatchJob;
 import com.jeremyli.jeremygenerator.vo.ColumnVo;
+import com.jeremyli.jeremygenerator.vo.DatabaseVo;
 import com.jeremyli.jeremygenerator.vo.TableVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -79,6 +80,11 @@ public class MySQLGenerateServiceImpl implements GenerateService {
     @Override
     public void generateBatchSQL(BatchJob batchJob) {
 
+    }
+
+    @Override
+    public List<String> getDatabaseTables(DatabaseVo dataBaseVo) {
+        return null;
     }
 
 

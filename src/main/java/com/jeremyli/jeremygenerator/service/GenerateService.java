@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.jeremyli.jeremygenerator.entity.TableEntity;
 import com.jeremyli.jeremygenerator.vo.BatchJob;
 import com.jeremyli.jeremygenerator.vo.ColumnVo;
+import com.jeremyli.jeremygenerator.vo.DatabaseVo;
 import com.jeremyli.jeremygenerator.vo.TableVo;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -159,4 +160,5 @@ public interface GenerateService {
     void generateBatchSQL(BatchJob batchJob);
 
 
+    List<String> getDatabaseTables(DatabaseVo dataBaseVo);
 }

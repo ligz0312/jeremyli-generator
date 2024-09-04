@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeremyli.jeremygenerator.mapper.DatabaseMapper">
+
+
+    <select id="getDatabaseTables"  parameterType="com.jeremyli.jeremygenerator.vo.DatabaseVo"  resultType="java.lang.String">
+        SELECT c.relname FROM pg_catalog.pg_class c
+                 JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+                 JOIN pg_catalog.pg_user u ON u.usesysid = c.relowner
+        WHERE n.nspname = #{dataBaseVo.dbSchema}
+          AND c.relkind = 'r'; -- 'r'表示普通表
+    </select>
+
+</mapper>

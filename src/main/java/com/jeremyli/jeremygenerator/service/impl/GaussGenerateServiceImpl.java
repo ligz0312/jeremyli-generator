@@ -3,11 +3,14 @@ package com.jeremyli.jeremygenerator.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.jeremyli.jeremygenerator.entity.ColumnEntity;
 import com.jeremyli.jeremygenerator.entity.TableEntity;
+import com.jeremyli.jeremygenerator.mapper.DatabaseMapper;
 import com.jeremyli.jeremygenerator.service.GenerateService;
 import com.jeremyli.jeremygenerator.vo.BatchJob;
 import com.jeremyli.jeremygenerator.vo.ColumnVo;
+import com.jeremyli.jeremygenerator.vo.DatabaseVo;
 import com.jeremyli.jeremygenerator.vo.TableVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,8 +21,8 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class GaussGenerateServiceImpl implements GenerateService {
-
-
+    @Autowired
+    DatabaseMapper databaseMapper;
 
 
     @Override
@@ -74,5 +77,11 @@ public class GaussGenerateServiceImpl implements GenerateService {
     @Override
     public void generateBatchSQL(BatchJob batchJob) {
 
+    }
+
+    @Override
+    public List<String> getDatabaseTables(DatabaseVo dataBaseVo) {
+
+        return databaseMapper.getDatabaseTables(dataBaseVo);
     }
 }
